@@ -32,7 +32,11 @@
     "angular-ui-router": "< 1.0",
     "bootstrap": "^3.3",
     "flat-ui": "~2.2.2",
-    "jquery": "*"
+    "angular-leaflet-directive": "< 1.0",
+    "d3": "~3.5.12",
+    "c3": "~0.4.10",
+    "jquery": "*",
+    "chroma-js": "~1.1.1"
   },
   "resolutions": {
     "angular": "^1.4"

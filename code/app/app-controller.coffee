@@ -8,8 +8,12 @@ app = angular.module "app.controllers"
 app.controller "AppCtrl", [
     "$scope"
     "$rootScope"
-    "$state"
-    "$stateParams"
-    ($scope, $rootScope, $state, $stateParams) ->
+    ($scope, $rootScope) ->
+
+        data = []
+
+        new vidatio.BarChart data, "test1"
+        new vidatio.BarChart data, "test2"
+        new vidatio.BarChart data, "test3"
 
 ]
