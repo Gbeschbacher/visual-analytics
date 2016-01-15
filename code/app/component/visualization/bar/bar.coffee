@@ -1,7 +1,7 @@
 "use strict"
 
 class vidatio.BarChart extends vidatio.Visualization
-    constructor: (dataset, scale, chartClass) ->
+    constructor: (dataset, scale, categories, chartClass) ->
 
         $ ->
             $("#chart").append("<div class=#{chartClass}></div>")
@@ -18,7 +18,7 @@ class vidatio.BarChart extends vidatio.Visualization
                 axis:
                     x:
                         type: "category"
-                        categories: ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6", "cat7", "cat8", "cat9", "cat10", "cat11", "cat12", "cat13" ]
+                        categories: categories
                     y:
                         show: true
                         inner: false
