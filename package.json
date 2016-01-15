@@ -1,0 +1,25 @@
+{
+  "name": "luftguete-land-salzburg",
+  "version": "1.0.0",
+  "description": "Quelle: https://www.data.gv.at/katalog/dataset/e768cb15-ab7c-4317-a072-94b8ab05cf7f",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "fast-csv": "^1.0.0",
+    "mysql": "^2.10.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gbeschbacher/visual-analytics.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gbeschbacher/visual-analytics/issues"
+  },
+  "homepage": "https://github.com/Gbeschbacher/visual-analytics#readme"
+}

@@ -12,6 +12,9 @@ lib-cov
 *.gz
 *.pyc
 *.bak
+.idea/
+
+config.json
 
 pids
 logs
