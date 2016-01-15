@@ -1,2 +1,15 @@
 #landing-page
-    include intro
+    .container-fluid
+        .row
+            .col-xs-12
+                ul
+                    li(ng-repeat="category in selection")
+                        label
+                             {{ category.name }}
+                            input(type="checkbox" ng-model="category.checked" ng-change="redraw()")
+
+        .row
+            .col-sm-6
+                #chart
+            .col-sm-6
+                leaflet(markers="markers" center="lisbon" width="100%" height="480px")

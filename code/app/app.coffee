@@ -10,6 +10,7 @@ app = angular.module "app", [
     "app.factories"
     "app.directives"
     "app.filters"
+    "leaflet-directive"
 ]
 
 app.run [
@@ -30,18 +31,10 @@ app.config [
         $locationProvider.html5Mode true
 
         $stateProvider
-        # abstract state for language as parameter in URL
-        .state "app",
-            abstract: true
-            url: "/VA"
-            controller: "AppCtrl"
-            template: "<ui-view/>"
 
-        # /
-        .state "app.index",
+        .state "app",
             url: "/"
             templateUrl: "index/index.html"
-
-
+            controller: "AppCtrl"
 ]
 

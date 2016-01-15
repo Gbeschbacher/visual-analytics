@@ -65,11 +65,19 @@ BUILD =
             "./bower_components/angular/angular.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
+            "./bower_components/d3/d3.js"
+            "./bower_components/c3/c3.js"
+            "./bower_components/chroma-js/chroma.js"
+            "./bower_components/leaflet/dist/leaflet-src.js"
+            "./bower_components/Leaflet.heat/dist/leaflet-heat.js"
+            "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
             "./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"
             "./bower_components/flat-ui/dist/css/flat-ui.css"
+            "./bower_components/leaflet/dist/leaflet.css"
+            "./bower_components/c3/c3.css"
         ]
     dirs:
         out: "./build"
