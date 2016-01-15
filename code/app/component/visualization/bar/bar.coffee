@@ -1,18 +1,7 @@
 "use strict"
 
 class vidatio.BarChart extends vidatio.Visualization
-    constructor: (dataset, chartClass) ->
-
-        dataset = [
-            ["data1", 30, 15, 13, 123, 345, 231, 123, 123, 123, 123 ,123 ,123 ,123]
-        ]
-
-        colorData = dataset[0]
-        colorData.splice(0, 1)
-
-        min = Math.min.apply(null, colorData)
-        max = Math.max.apply(null, colorData)
-        scale = chroma.scale(["lightgreen", "darkgreen"]).out("hex").domain([min, max])
+    constructor: (dataset, scale, chartClass) ->
 
         $ ->
             $("#chart").append("<div class=#{chartClass}></div>")

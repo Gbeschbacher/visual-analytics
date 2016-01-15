@@ -10,6 +10,7 @@ app = angular.module "app", [
     "app.factories"
     "app.directives"
     "app.filters"
+    "leaflet-directive"
 ]
 
 app.run [

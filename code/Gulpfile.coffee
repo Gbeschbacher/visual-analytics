@@ -68,6 +68,9 @@ BUILD =
             "./bower_components/d3/d3.js"
             "./bower_components/c3/c3.js"
             "./bower_components/chroma-js/chroma.js"
+            "./bower_components/leaflet/dist/leaflet-src.js"
+            "./bower_components/Leaflet.heat/dist/leaflet-heat.js"
+            "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
