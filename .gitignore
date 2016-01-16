@@ -32,7 +32,7 @@ builtAssets/
 tmp/
 
 app/public/
-build/*
+code/build/*
 
 userconfig.coffee
 userconfig*
