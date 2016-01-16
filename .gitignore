@@ -18,6 +18,8 @@ build/
 
 config.json
 
+airquality.sql
+
 pids
 logs
 results
