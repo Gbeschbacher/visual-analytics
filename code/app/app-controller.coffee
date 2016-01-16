@@ -10,7 +10,7 @@ app.controller "AppCtrl", [
     ($scope) ->
 
         dataset = [
-            ["data1", 30, 15, 13, 123, 345, 231, 123, 123, 123, 123 ,123 ,123 ,123]
+            ["data1", 30, 15, 13, 123, 345, 231, 123]
         ]
         # this isnt clonedData = dataset[0] because clonedData would be a shallow copy and i need a deep copy
         # clonedData is only used for getting
@@ -22,7 +22,7 @@ app.controller "AppCtrl", [
         scale = chroma.scale(["lightgreen", "darkgreen"]).out("hex").domain([min, max])
 
         # CATEGORIS = LOCATIONS (z.B. Stickstoff)
-        categories  = ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6", "cat7", "cat8", "cat9", "cat10", "cat11", "cat12", "cat13" ]
+        categories  = ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6", "cat7"]
 
         # PREPARING 2-WAY DATA BINDING FOR CHECKING THE LOCATIONS I WANT TO SEE AS CHARTS ETC.
         $scope.selection = []
