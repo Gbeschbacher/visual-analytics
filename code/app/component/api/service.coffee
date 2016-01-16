@@ -11,35 +11,36 @@ app.factory "ApiService", [
 
             getData: (type) ->
                 deferred = $q.defer()
-                $http(
+
+                $http
                     method: "GET"
                     url: @baseUrl + "" + type
-                ).then ((data) ->
+                .then (data) ->
                     console.log data
                     deferred.resolve data
-                ), (error) ->
-                    console.log error
+                , (error) ->
+                    console.error error
                     deferred.reject error
 
                 return deferred.promise
 
             getBaseData: ->
                 deferred = $q.defer()
-                $http(
-                    method: "POST"
-                    url: @baseUrl + "" + type
+
+                $http
+                    method: "GET"
+                    url: "http://localhost:3000/measurements"
                     data:
-                        "parameter": ["param1", "param2", "param3"]
-                        "timeframe": "whut"
-                ).then ((data) ->
+                        parameter: ["param1", "param2", "param3"]
+                        timeframe: "q"
+                .then (data) ->
                     console.log data
                     deferred.resolve data
-                ), (error) ->
-                    console.log error
+                , (error) ->
+                    console.error error
                     deferred.reject error
 
                 return deferred.promise
 
         new API
-
 ]

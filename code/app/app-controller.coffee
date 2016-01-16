@@ -10,7 +10,7 @@ app.controller "AppCtrl", [
     "ApiService"
     "$q"
     ($scope, ApiService, $q) ->
-        
+
         ###
             MAIN SCOPE STUFF
         ###
@@ -20,29 +20,28 @@ app.controller "AppCtrl", [
             lng: -9.13
             zoom: 8
 
+        ApiService.getBaseData()
+
         $q.all([
             ApiService.getData "parameters"
             ApiService.getData "locations"
         ]).then ( (data) ->
             console.log "***************"
-            params = data[0]
+            parameters = data[0]
             locations = data[1]
 
             plotData = [
                 ["data1", 30, 15, 13, 123, 345, 231, 123, 123, 123, 123, 123, 123, 123]
             ]
 
-            init params, locations, plotData
-
+            init parameters, locations, plotData
         ), (error) ->
             console.log "/////////////////"
             console.log error
 
-
         ###
             FUNCTIONS BELOW
         ###
-
         colorInterpolation = (dataset) ->
             # this isnt clonedData = dataset[0] because clonedData would be a shallow copy and i need a deep copy
             # clonedData is only used for getting
