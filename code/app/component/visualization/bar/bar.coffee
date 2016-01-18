@@ -13,7 +13,7 @@ class vidatio.BarChart extends vidatio.Visualization
             locations.push data.location
 
         $ ->
-            $("#chart").append("<div class=#{(dataObj.name).toLowerCase()}></div>")
+            $("#bar-chart").append("<div class=#{(dataObj.name).toLowerCase()}></div>")
             chart = c3.generate
                 bindto: ".#{(dataObj.name).toLowerCase()}"
                 data:

@@ -120,19 +120,14 @@ app.controller "AppCtrl", [
                 max: max
             }
 
-        init = (data) ->
+        init = (barChartData, lineChartData) ->
 
-            $scope.selection = data
+            new vidatio.TimeSeriesChart(lineChartData)
 
+            $scope.selection = barChartData
             for parameter, i in $scope.selection
-
                 {scale, min, max} = colorScale parameter.values
-
-                drawBarChart parameter, scale
-                # drawMarker parameter, scale, min, max
-
-        drawBarChart = (data, scale) ->
-            new vidatio.BarChart data, scale
+                new vidatio.BarChart data, scale
 
         drawMarker = (dataObj, scale, min, max) ->
 
