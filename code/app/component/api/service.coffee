@@ -9,19 +9,6 @@ app.factory "ApiService", [
         class API
             baseUrl: "http://localhost:3000/"
 
-            getData: (type) ->
-                deferred = $q.defer()
-
-                $http
-                    method: "GET"
-                    url: @baseUrl + "" + type
-                .then (data) ->
-                    deferred.resolve data
-                , (error) ->
-                    deferred.reject error
-
-                return deferred.promise
-
             getBaseData: (timeframe) ->
                 deferred = $q.defer()
 
