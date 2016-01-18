@@ -5,7 +5,8 @@ class window.vidatio.TimeSeriesChart extends window.vidatio.Visualization
 
         @chart = null
 
-        columns = []
+        @columns = []
+        @chartBackup = []
         months = {}
         values = {}
 
@@ -20,25 +21,49 @@ class window.vidatio.TimeSeriesChart extends window.vidatio.Visualization
         x = ['x']
         for own key, value of months
             x.push(key)
-        columns.push x
+        @columns.push x
 
         for own key, value of values
             tmp = []
             tmp.push(key.substring(0, key.indexOf(" ")))
             tmp = tmp.concat(value)
-            columns.push tmp
+            @columns.push tmp
+
 
         $ =>
             @chart = c3.generate
                 bindto: '#line-chart'
                 data:
                     x: 'x'
-                    columns: columns
+                    columns: @columns
                 axis: x:
                     type: 'timeseries'
                     tick: format: '%Y-%m'
 
             super(data, @chart)
 
-    getChart: ->
-        return @chart
+    toggle: (id) ->
+        id = "PM2.5" if id is "Pm2.5"
+        id = "PM10" if id is "Pm10"
+
+        found = false
+
+        # Check if the line needs to be added or removed
+        # found = true means that it needs to be added
+        for line, idx in @chartBackup
+            if id in line
+                found = true
+                break
+
+        if found
+            @chart.load
+                columns: [
+                    line
+                ]
+            @chartBackup.splice idx, 1
+        else
+            for line, i in @columns
+                if id in line
+                    @chartBackup.push line
+                    @chart.load
+                        unload: [id]
