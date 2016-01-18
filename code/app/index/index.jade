@@ -1,18 +1,21 @@
-#landing-page
-    .container-fluid
-        .row
-            .col-sm-6
-                #line-chart
-        .row
-            .col-xs-12
-                ul
-                    li(ng-repeat="parameter in selection")
-                        label
-                            input(type="checkbox" ng-init="parameter.checked=true" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
-                            | {{ parameter.name | capitalize }}
+.container-fluid
+    .row
+        .col-xs-12
+            h1 Luftgüte Salzburg Land
+    .row
+        .col-xs-6
+            #line-chart
+    .row
+        .col-xs-6
+            #bar-charts
+        .col-xs-6
+            leaflet(markers="markers" center="center" width="100%" height="480px")
+    .row
+        .col-xs-12
+            ul
+                li(ng-repeat="parameter in selection")
+                    label
+                        input(type="checkbox" ng-init="parameter.checked=true" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
+                        | {{ parameter.name | capitalize }}
 
-        .row
-            .col-sm-6
-                #bar-charts
-            //.col-sm-6
-            //    leaflet(markers="markers" center="center" width="100%" height="480px")
+
