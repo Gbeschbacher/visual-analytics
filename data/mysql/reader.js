@@ -148,9 +148,9 @@ var convert = function (rows) {
         tmp[parameter].push({
             value: element.value,
             // changed because writer has a bug
-            location: element.latitude,
-            latitude: element.location,
-            longitude: element.longitude
+            location: element.location,
+            latitude: element.longitude,
+            longitude: element.latitude
         })
     });
 
