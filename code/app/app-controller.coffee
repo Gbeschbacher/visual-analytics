@@ -27,7 +27,8 @@ app.controller "AppCtrl", [
             ApiService.getBaseData()
             ApiService.getBaseData("m")
         ]).then ( (data) ->
-            baseData = data[0]
+            barChartData = data[0]
+            lineChartData = data[1]
 
             # baseData looks as follows
             ###
@@ -45,7 +46,7 @@ app.controller "AppCtrl", [
                 ]
             ###
 
-            baseData = [
+            barChartData = [
                 {
                     name: "kohlenmonoxid"
                     values: [
@@ -95,7 +96,7 @@ app.controller "AppCtrl", [
             ]
 
 
-            init baseData
+            init barChartData, lineChartData
         ), (error) ->
             console.error error
 
@@ -123,7 +124,7 @@ app.controller "AppCtrl", [
             $scope.selection = barChartData
             for parameter, i in $scope.selection
                 {scale, min, max} = colorScale parameter.values
-                new vidatio.BarChart data, scale
+                new vidatio.BarChart parameter, scale
 
         drawMarker = (dataObj, scale, min, max) ->
             for data, i in dataObj.values

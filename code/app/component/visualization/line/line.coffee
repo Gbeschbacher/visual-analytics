@@ -1,7 +1,17 @@
 "use strict"
 
 class vidatio.TimeSeriesChart extends vidatio.Visualization
-    constructor: (dataObj, scale) ->
+    constructor: (data) ->
+
+        console.log("TIMESERIES");
+        console.log(data);
+
+        columns = []
+
+        months = ["2014-01-01",
+
+        data.json.forEach (index, element, array) ->
+
 
         $ ->
             chart = c3.generate(
@@ -15,6 +25,6 @@ class vidatio.TimeSeriesChart extends vidatio.Visualization
                     ]
                 axis: x:
                     type: 'timeseries'
-                    tick: format: '%Y-%m-%d')
+                    tick: format: '%Y-%m')
 
-            super(dataObj, chart)
+            super(data, chart)
