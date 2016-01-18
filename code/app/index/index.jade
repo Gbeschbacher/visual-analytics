@@ -5,8 +5,8 @@
                 ul
                     li(ng-repeat="parameter in selection")
                         label
-                            input(type="checkbox" ng-model="parameter.checked" ng-change="redraw(parameter)")
-                            | {{ parameter.name }}
+                            input(type="checkbox" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
+                            | {{ parameter.name | capitalize }}
 
         .row
             .col-sm-6

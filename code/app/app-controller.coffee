@@ -47,57 +47,53 @@ app.controller "AppCtrl", [
 
             baseData = [
                 {
-                    name: "Kohlenmonoxid"
+                    name: "kohlenmonoxid"
                     values: [
                         {
                             location: "Tauernautobahn"
-                            lat: 10
-                            long: 11
+                            lat: 47.814979
+                            long: 13.034382
                             value: 0.1
                         }
                         {
                             location: "Tamsweg"
-                            lat: 1
-                            long: 2
+                            lat: 47.326501
+                            long: 12.794627
                             value: 0.4
                         }
                         {
                             location: "Zell am See"
-                            lat: 3
-                            long: 5
+                            lat: 47.682836
+                            long: 13.099793
                             value: 0.9
                         }
                     ]
                 }
                 {
-                    name: "Stickstoffmonoxid"
+                    name: "stickstoffmonoxid"
                     values: [
                         {
                             location: "Tauernautobahn"
-                            lat: 20
-                            long: 21
+                            lat: 47.814979
+                            long: 13.034382
                             value: 0.1
                         }
                         {
                             location: "Tamsweg"
-                            lat: 11
-                            long: 12
+                            lat: 47.326501
+                            long: 12.794627
                             value: 0.4
                         }
                         {
                             location: "Zell am See"
-                            lat: 13
-                            long: 15
+                            lat: 47.682836
+                            long: 13.099793
                             value: 0.9
                         }
                     ]
                 }
             ]
 
-            # TmpData for Barchart
-            # plotData = [
-            #     ["data1", 30, 15, 13, 123, 345, 231, 123, 123, 123, 123, 123, 123, 123]
-            # ]
 
             init baseData
         ), (error) ->
@@ -129,18 +125,24 @@ app.controller "AppCtrl", [
                 {scale, min, max} = colorScale parameter.values
 
                 drawBarChart parameter, scale
-                # drawMarker parameter, scale, min, max
+                drawMarker parameter, scale, min, max
 
         drawBarChart = (data, scale) ->
             new vidatio.BarChart data, scale
 
         drawMarker = (dataObj, scale, min, max) ->
+            for data, i in dataObj.values
 
-            for data in dataObj.values
-                # TODO: dynamically set markerWidth and Height based on min/max values of function
-                markerWidth = markerHeight = 20
+                maxMarkerSize = 20
+                minMarkerSize = 1
+                normalizedValue = (data.value - min) / (max - min)
 
-                $scope.markers[propertyCount++] =
+                if normalizedValue
+                    markerWidth = markerHeight = (maxMarkerSize * normalizedValue)
+                else
+                    markerWidth = markerHeight = minMarkerSize
+
+                $scope.markers[dataObj.name + "_" + data.location] =
                     lat: data.lat
                     lng: data.long
                     message: dataObj.name
@@ -150,23 +152,7 @@ app.controller "AppCtrl", [
                         html: "<div class='dataMarker' style='color:#{scale(data.value)} !important; background-color:#{scale(data.value)} !important; width:#{markerWidth}px; height:#{markerHeight}px; border-radius:#{markerWidth / 2}px'></div>"
 
         # triggers on every checkbox change
-        $scope.redraw = (parameter) ->
-            console.log parameter
-
-            # $("#chart").empty()
-
-            # # select all categories which are checked
-            # categories = $scope.selection.filter (category) ->
-            #     return category.checked
-
-            # # select all names of categories and push it in chartCategories
-            # chartCategories = []
-            # for category in categories
-            #     chartCategories.push category.name if category.checked
-
-            # # rebuild charts with corresponding data and chartcategories
-            # # TODO: filter dataset again according to selected categories
-            # for parameter, i in $scope.selection
-            #     new vidatio.BarChart dataset, scale, chartCategories, "test#{i}" if parameter.checked
-
+        $scope.toggleParameter = (parameter) ->
+            $(".#{parameter.name}").toggle()
+            return false
 ]
