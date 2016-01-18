@@ -68,8 +68,8 @@ var writeDB = function (index) {
 
     var post = {
         location: data["Messort"],
-        latitude: data["LONGITUDE"].replace(",", "."),
-        longitude: data["LATITUDE"].replace(",", "."),
+        latitude: data["LATITUDE"].replace(",", "."),
+        longitude: data["LONGITUDE"].replace(",", "."),
         parameter: data["Parameter"],
         datetime: datetime,
         hmw: data["HMW"].replace(",", ".")

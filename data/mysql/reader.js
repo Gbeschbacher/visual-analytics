@@ -122,7 +122,6 @@ app.get('/measurements', function (req, res) {
                 }
 
                 rows = convert(rows);
-                console.log(rows);
 
                 res.json({
                     result: 'success',
@@ -148,8 +147,9 @@ var convert = function (rows) {
         }
         tmp[parameter].push({
             value: element.value,
-            location: element.location,
-            latitude: element.latitude,
+            // changed because writer has a bug
+            location: element.latitude,
+            latitude: element.location,
             longitude: element.longitude
         })
     });
@@ -182,7 +182,7 @@ app.get('/measurements/months', function (req, res) {
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
     // Results in average hmw per parameter per month = 7 parameters * 12 months = 84 rows
-    query = 'SELECT SUM(hmw)/COUNT(*), parameter, MONTHNAME(datetime) FROM Measurements GROUP BY parameter, MONTH(datetime)';
+    query = 'SELECT AVG(hmw) as value, parameter, MONTHNAME(datetime) as month FROM Measurements GROUP BY parameter, MONTH(datetime)';
 
     connectionpool.getConnection(function (err, connection) {
         if (err) {
@@ -202,6 +202,9 @@ app.get('/measurements/months', function (req, res) {
                         err: err.code
                     });
                 }
+
+                console.log(rows);
+
                 res.json({
                     result: 'success',
                     err: '',
