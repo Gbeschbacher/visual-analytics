@@ -4,7 +4,7 @@ class vidatio.BarChart extends vidatio.Visualization
     constructor: (dataObj, scale) ->
 
         # C3JS needs a 2d-Array with a string at the beginning
-        barData = [["data1"]]
+        barData = [["#{dataObj.name}"]]
         # C3JS needs bar-labels as 1D array of strings
         locations = []
 

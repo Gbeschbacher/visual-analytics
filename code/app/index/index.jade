@@ -3,7 +3,7 @@
         .col-xs-12
             h1 Luftgüte Salzburg Land - 2014
     .row
-        .col-xs-6
+        .col-xs-12
             #line-chart
             leaflet(markers="markers" center="center" width="100%" height="480px")
         .col-xs-6
@@ -15,5 +15,3 @@
                     label
                         input(type="checkbox" ng-init="parameter.checked=true" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
                         | {{ parameter.name | capitalize }}
-
-

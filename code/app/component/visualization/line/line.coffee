@@ -22,9 +22,11 @@ class vidatio.TimeSeriesChart extends vidatio.Visualization
 
         for own key, value of values
             tmp = []
-            tmp.push(key)
+            tmp.push(key.substring(0, key.indexOf(" ")))
             tmp = tmp.concat(value)
             columns.push tmp
+
+        console.log columns
 
         $ ->
             chart = c3.generate
@@ -35,3 +37,5 @@ class vidatio.TimeSeriesChart extends vidatio.Visualization
                 axis: x:
                     type: 'timeseries'
                     tick: format: '%Y-%m'
+
+            super(data, chart)
