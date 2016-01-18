@@ -17,6 +17,8 @@ app.controller "AppCtrl", [
 
         $scope.markers = {}
         $scope.markersBackup = {}
+        lineChart = undefined
+
         # Map center is somewhere in the middle of austria
         $scope.center =
             lat: 47.480959
@@ -70,13 +72,13 @@ app.controller "AppCtrl", [
 
         init = (barChartData, lineChartData) ->
 
-            new vidatio.TimeSeriesChart lineChartData
+            lineChart = new vidatio.TimeSeriesChart lineChartData
 
             $scope.selection = barChartData
             for parameter, i in $scope.selection
                 {scale, min, max} = colorScale parameter.values
-                new vidatio.BarChart parameter, scale
-                drawMarker parameter, scale, min, max
+                # new vidatio.BarChart parameter, scale
+                # drawMarker parameter, scale, min, max
 
         drawMarker = (dataObj, scale, min, max) ->
             for data, i in dataObj.values
@@ -107,6 +109,9 @@ app.controller "AppCtrl", [
 
             # toggles the visibility of markers
             toggleMarker parameter
+
+            console.log lineChart.getChart()
+
 
             return false
 
