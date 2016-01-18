@@ -16,7 +16,7 @@ app.controller "AppCtrl", [
             MAIN SCOPE STUFF
         ###
 
-        $('.checkboxes').draggable()
+        $(".checkboxes").draggable()
 
         $scope.markers = {}
         $scope.markersBackup = {}
@@ -98,7 +98,7 @@ app.controller "AppCtrl", [
                 $scope.markers[(dataObj.name.replace ".", "") + "_" + (data.location.replace /\W/g, "")] =
                     lat: data.latitude
                     lng: data.longitude
-                    message: dataObj.name
+                    message: "#{$filter("capitalize")(dataObj.name)} <br> #{data.location} <br> #{data.value}"
                     icon:
                         type: "div"
                         iconSize: [markerWidth, markerHeight]
