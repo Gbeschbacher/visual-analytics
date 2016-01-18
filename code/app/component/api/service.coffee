@@ -27,12 +27,18 @@ app.factory "ApiService", [
             getBaseData: ->
                 deferred = $q.defer()
 
+                timeframe = "q"
+
+                if timeframe is "q"
+                    url =  "http://localhost:3000/measurements/quarters"
+                else if timeframe is "m"
+                    url =  "http://localhost:3000/measurements/months"
+                else if timeframe is "w"
+                    url =  "http://localhost:3000/measurements/weeks"
+
                 $http
                     method: "GET"
-                    url: "http://localhost:3000/measurements"
-                    data:
-                        parameter: ["param1", "param2", "param3"]
-                        timeframe: "q"
+                    url: url
                 .then (data) ->
                     console.log data
                     deferred.resolve data

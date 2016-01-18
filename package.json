@@ -4,8 +4,10 @@
   "description": "Quelle: https://www.data.gv.at/katalog/dataset/e768cb15-ab7c-4317-a072-94b8ab05cf7f",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.14.2",
     "express": "^4.13.3",
     "fast-csv": "^1.0.0",
+    "json": "^9.0.3",
     "mysql": "^2.10.2"
   },
   "devDependencies": {},
