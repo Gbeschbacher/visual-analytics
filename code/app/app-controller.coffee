@@ -70,13 +70,13 @@ app.controller "AppCtrl", [
 
         init = (barChartData, lineChartData) ->
 
-            new vidatio.TimeSeriesChart(lineChartData)
+            new vidatio.TimeSeriesChart lineChartData
 
             $scope.selection = barChartData
             for parameter, i in $scope.selection
                 {scale, min, max} = colorScale parameter.values
                 new vidatio.BarChart parameter, scale
-                #drawMarker parameter, scale, min, max
+                drawMarker parameter, scale, min, max
 
         drawMarker = (dataObj, scale, min, max) ->
             for data, i in dataObj.values
@@ -90,7 +90,7 @@ app.controller "AppCtrl", [
                 else
                     markerWidth = markerHeight = minMarkerSize
 
-                $scope.markers[dataObj.name + "_" + data.location.replace /\W/g, ""] =
+                $scope.markers[(dataObj.name.replace ".", "") + "_" + (data.location.replace /\W/g, "")] =
                     lat: data.latitude
                     lng: data.longitude
                     message: dataObj.name
@@ -117,16 +117,17 @@ app.controller "AppCtrl", [
                     if yes remove object in markersBackup and add it in markers
                     else remove from markers and add it in markersBackup
             ###
+            _key = parameter.name.replace ".", ""
             if Object.keys($scope.markersBackup).some(((key) ->
-                ~key.indexOf(parameter.name)
+                ~key.indexOf(_key)
               ))
                 for key, value of $scope.markersBackup
-                    if ~key.indexOf(parameter.name)
+                    if ~key.indexOf(_key)
                         $scope.markers[key] = value
                         delete $scope.markersBackup[key]
             else
                 for key, value of $scope.markers
-                    if ~key.indexOf(parameter.name)
+                    if ~key.indexOf(_key)
                         $scope.markersBackup[key] = value
                         delete $scope.markers[key]
 
