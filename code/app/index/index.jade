@@ -1,15 +1,13 @@
 .container-fluid
     .row
         .col-xs-12
-            h1 Luftgüte Salzburg Land
+            h1 Luftgüte Salzburg Land - 2014
     .row
         .col-xs-6
             #line-chart
-    .row
+            leaflet(markers="markers" center="center" width="100%" height="480px")
         .col-xs-6
             #bar-charts
-        .col-xs-6
-            leaflet(markers="markers" center="center" width="100%" height="480px")
     .row
         .col-xs-12
             ul

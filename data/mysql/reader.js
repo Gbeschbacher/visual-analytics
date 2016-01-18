@@ -147,8 +147,8 @@ var convert = function (rows) {
         }
         tmp[parameter].push({
             value: element.value,
-            // changed because writer has a bug
             location: element.location,
+            // changed because writer has a bug
             latitude: element.longitude,
             longitude: element.latitude
         })
