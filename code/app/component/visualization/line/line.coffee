@@ -3,14 +3,6 @@
 class vidatio.TimeSeriesChart extends vidatio.Visualization
     constructor: (dataObj, scale) ->
 
-        # C3JS needs a 2d-Array with a string at the beginning
-        barData = [["data1"]]
-        locations = []
-
-        for data in dataObj.values
-            barData[0].push data.value
-            locations.push data.location
-
         $ ->
             chart = c3.generate(
                 bindto: '#line-chart'

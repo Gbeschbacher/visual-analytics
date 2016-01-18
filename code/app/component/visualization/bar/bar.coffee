@@ -6,6 +6,7 @@ class vidatio.BarChart extends vidatio.Visualization
 
         # C3JS needs a 2d-Array with a string at the beginning
         barData = [["data1"]]
+        # C3JS needs bar-labels as 1D array of strings
         locations = []
 
         for data in dataObj.values
@@ -13,9 +14,9 @@ class vidatio.BarChart extends vidatio.Visualization
             locations.push data.location
 
         $ ->
-            $("#bar-chart").append("<div class=#{(dataObj.name).toLowerCase()}></div>")
+            $("#chart").append("<div class=#{dataObj.name}></div>")
             chart = c3.generate
-                bindto: ".#{(dataObj.name).toLowerCase()}"
+                bindto: ".#{dataObj.name}"
                 data:
                     columns: barData,
                     type: "bar"
@@ -33,7 +34,7 @@ class vidatio.BarChart extends vidatio.Visualization
                         show: true
                         inner: false
                         label:
-                            text: dataObj.name
+                            text: dataObj.name[0].toUpperCase() + dataObj.name.slice(1)
                             position: "outer-middle"
 
             super(dataObj, chart)
