@@ -1,30 +1,39 @@
 "use strict"
 
 class vidatio.BarChart extends vidatio.Visualization
-    constructor: (dataset, scale, categories, chartClass) ->
+    constructor: (dataObj, scale) ->
+
+
+        # C3JS needs a 2d-Array with a string at the beginning
+        barData = [["data1"]]
+        locations = []
+
+        for data in dataObj.values
+            barData[0].push data.value
+            locations.push data.location
 
         $ ->
-            $("#chart").append("<div class=#{chartClass}></div>")
+            $("#chart").append("<div class=#{(dataObj.name).toLowerCase()}></div>")
             chart = c3.generate
-                bindto: ".#{chartClass}"
+                bindto: ".#{(dataObj.name).toLowerCase()}"
                 data:
-                    columns: dataset,
+                    columns: barData,
                     type: "bar"
                     color: (color, data) ->
                         return scale data.value
                 bar: width: ratio: 0.5
-                padding: right: 30
+                padding:
+                    bottom: 75
                 legend: show: false
                 axis:
                     x:
                         type: "category"
-                        categories: categories
+                        categories: locations
                     y:
                         show: true
                         inner: false
                         label:
-                            text: "Schwefelirgendwas"
+                            text: dataObj.name
                             position: "outer-middle"
 
-
-            super(dataset, chart)
+            super(dataObj, chart)

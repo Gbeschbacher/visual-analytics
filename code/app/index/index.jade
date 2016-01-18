@@ -3,13 +3,13 @@
         .row
             .col-xs-12
                 ul
-                    li(ng-repeat="category in selection")
+                    li(ng-repeat="parameter in selection")
                         label
-                             {{ category.name }}
-                            input(type="checkbox" ng-model="category.checked" ng-change="redraw()")
+                            input(type="checkbox" ng-model="parameter.checked" ng-change="redraw(parameter)")
+                            | {{ parameter.name }}
 
         .row
             .col-sm-6
                 #chart
             .col-sm-6
-                leaflet(markers="markers" center="lisbon" width="100%" height="480px")
+                leaflet(markers="markers" center="center" width="100%" height="480px")
