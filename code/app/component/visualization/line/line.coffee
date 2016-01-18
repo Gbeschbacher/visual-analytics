@@ -2,7 +2,6 @@
 
 class window.vidatio.TimeSeriesChart extends window.vidatio.Visualization
     constructor: (data) ->
-
         @chart = null
 
         @columns = []
@@ -36,9 +35,20 @@ class window.vidatio.TimeSeriesChart extends window.vidatio.Visualization
                 data:
                     x: 'x'
                     columns: @columns
-                axis: x:
-                    type: 'timeseries'
-                    tick: format: '%Y-%m'
+                axis:
+                    x:
+                        type: 'timeseries'
+                        tick:
+                            format: '%Y-%m'
+                        label:
+                            text: 'Monat'
+                            position: 'outer-center'
+                    y:
+                        label:
+                            text: 'Schadstoffwert'
+                            position: 'outer-middle'
+                size:
+                    height: 400
 
             super(data, @chart)
 

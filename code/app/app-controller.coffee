@@ -16,6 +16,8 @@ app.controller "AppCtrl", [
             MAIN SCOPE STUFF
         ###
 
+        $('.checkboxes').draggable()
+
         $scope.markers = {}
         $scope.markersBackup = {}
         lineChart = undefined

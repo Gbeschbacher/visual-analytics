@@ -62,6 +62,7 @@ BUILD =
     plugins:
         js: [
             "./bower_components/jquery/dist/jquery.js"
+            "./bower_components/jquery-ui/jquery-ui.min.js"
             "./bower_components/angular/angular.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"

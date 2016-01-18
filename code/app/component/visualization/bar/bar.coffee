@@ -21,6 +21,8 @@ class window.vidatio.BarChart extends window.vidatio.Visualization
                     type: "bar"
                     color: (color, data) ->
                         return scale data.value
+                size:
+                    height: 240
                 bar: width: ratio: 0.5
                 padding:
                     bottom: 75
@@ -29,6 +31,7 @@ class window.vidatio.BarChart extends window.vidatio.Visualization
                     x:
                         type: "category"
                         categories: locations
+                        label: "Ort"
                     y:
                         show: true
                         inner: false

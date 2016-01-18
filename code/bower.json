@@ -37,7 +37,8 @@
     "c3": "~0.4.10",
     "jquery": "*",
     "chroma-js": "~1.1.1",
-    "leaflet.heat": "Leaflet.heat#*"
+    "leaflet.heat": "Leaflet.heat#*",
+    "jquery-ui": "~1.11.4"
   },
   "resolutions": {
     "angular": "^1.4"
