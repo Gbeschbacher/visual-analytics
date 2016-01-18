@@ -26,16 +26,12 @@ class vidatio.TimeSeriesChart extends vidatio.Visualization
             tmp = tmp.concat(value)
             columns.push tmp
 
-        console.log columns
-
         $ ->
-            chart = c3.generate(
+            chart = c3.generate
                 bindto: '#line-chart'
                 data:
                     x: 'x'
                     columns: columns
                 axis: x:
                     type: 'timeseries'
-                    tick: format: '%Y-%m')
-
-            super(data, chart)
+                    tick: format: '%Y-%m'
