@@ -24,17 +24,17 @@ app.factory "ApiService", [
 
                 return deferred.promise
 
-            getBaseData: ->
+            getBaseData: (timeframe) ->
                 deferred = $q.defer()
 
-                timeframe = "q"
+                timeframe = timeframe || null
 
-                if timeframe is "q"
-                    url =  "http://localhost:3000/measurements/quarters"
-                else if timeframe is "m"
+                if timeframe is "m"
+                    # for line diagram
                     url =  "http://localhost:3000/measurements/months"
-                else if timeframe is "w"
-                    url =  "http://localhost:3000/measurements/weeks"
+                else
+                    # for bar plots and map viz
+                    url =  "http://localhost:3000/measurements"
 
                 $http
                     method: "GET"
