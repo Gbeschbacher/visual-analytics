@@ -76,7 +76,7 @@ app.controller "AppCtrl", [
             for parameter, i in $scope.selection
                 {scale, min, max} = colorScale parameter.values
                 vidatio.BarChart parameter, scale
-                drawMarker parameter, scale, min, max
+                #drawMarker parameter, scale, min, max
 
         drawMarker = (dataObj, scale, min, max) ->
             for data, i in dataObj.values
