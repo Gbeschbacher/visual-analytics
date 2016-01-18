@@ -91,16 +91,16 @@ app.get('/locations', function (req, res) {
     });
 });
 
-app.get('/measurements/quarters', function (req, res) {
+app.get('/measurements', function (req, res) {
 
-    console.log("GET measurments/quarters");
+    console.log("GET measurments per parameter (containing location + value)");
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-HTTP-Method-Override");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
     // Results in average hmw per parameter per quarter = 7 parameters * 4 quarters = 28 rows
-    query = 'SELECT SUM(hmw)/COUNT(*), parameter, QUARTER(datetime) FROM Measurements GROUP BY parameter, QUARTER(datetime)';
+    query = 'SELECT AVG(hmw) AS value, parameter, location, latitude, longitude FROM Measurements GROUP BY parameter, location';
 
     connectionpool.getConnection(function (err, connection) {
         if (err) {
@@ -120,6 +120,10 @@ app.get('/measurements/quarters', function (req, res) {
                         err: err.code
                     });
                 }
+
+                rows = convert(rows);
+                console.log(rows);
+
                 res.json({
                     result: 'success',
                     err: '',
@@ -132,6 +136,42 @@ app.get('/measurements/quarters', function (req, res) {
         }
     });
 });
+
+var convert = function (rows) {
+    var tmp = {};
+    rows.forEach(function (element, index, array) {
+        var idx = element.parameter.indexOf(" ");
+        var parameter = element.parameter.substring(0, idx).toLowerCase();
+
+        if (!tmp.hasOwnProperty(parameter)) {
+            tmp[parameter] = []
+        }
+        tmp[parameter].push({
+            value: element.value,
+            location: element.location,
+            latitude: element.latitude,
+            longitude: element.longitude
+        })
+    });
+
+    var array = [];
+    for (var property in tmp) {
+        if (tmp.hasOwnProperty(property)) {
+            var obj = {
+                name: property,
+                values: []
+            };
+
+            tmp[property].forEach(function (index, element, array) {
+                obj.values.push(index);
+            });
+
+            array.push(obj);
+        }
+    }
+
+    return array;
+};
 
 app.get('/measurements/months', function (req, res) {
 
@@ -143,48 +183,6 @@ app.get('/measurements/months', function (req, res) {
 
     // Results in average hmw per parameter per month = 7 parameters * 12 months = 84 rows
     query = 'SELECT SUM(hmw)/COUNT(*), parameter, MONTHNAME(datetime) FROM Measurements GROUP BY parameter, MONTH(datetime)';
-
-    connectionpool.getConnection(function (err, connection) {
-        if (err) {
-            console.error('CONNECTION error: ', err);
-            res.statusCode = 503;
-            res.json({
-                result: 'error',
-                err: err.code
-            });
-        } else {
-            connection.query(query, function (err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.json({
-                        result: 'error',
-                        err: err.code
-                    });
-                }
-                res.json({
-                    result: 'success',
-                    err: '',
-                    fields: fields,
-                    json: rows,
-                    length: rows.length
-                });
-                connection.release();
-            });
-        }
-    });
-});
-
-app.get('/measurements/weeks', function (req, res) {
-
-    console.log("GET measurments/weeks");
-
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-HTTP-Method-Override");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-
-    // Results in average hmw per parameter per week = 7 parameters * 52 months = 364 rows
-    query = 'SELECT SUM(hmw)/COUNT(*), parameter, WEEK(datetime) FROM Measurements GROUP BY parameter, WEEK(datetime)';
 
     connectionpool.getConnection(function (err, connection) {
         if (err) {

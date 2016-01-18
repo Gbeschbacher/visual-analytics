@@ -16,32 +16,24 @@ app.factory "ApiService", [
                     method: "GET"
                     url: @baseUrl + "" + type
                 .then (data) ->
-                    # console.log data
                     deferred.resolve data
                 , (error) ->
-                    # console.error error
                     deferred.reject error
 
                 return deferred.promise
 
-            getBaseData: ->
+            getBaseData: (timeframe) ->
                 deferred = $q.defer()
 
-                timeframe = "y"
-
-                type = "quarters" if timeframe is "q"
-                type = "months" if timeframe is "m"
-                type = "weeks" if timeframe is "w"
-                type = "year" if timeframe is "y"
+                timeframe = timeframe or null
+                type = if timeframe is "m" then "/months" else ""
 
                 $http
                     method: "GET"
-                    url: @baseUrl + "measurements/" + type
+                    url: @baseUrl + "measurements" + type
                 .then (data) ->
-                    # console.log data
                     deferred.resolve data
                 , (error) ->
-                    # console.error error
                     deferred.reject error
 
                 return deferred.promise

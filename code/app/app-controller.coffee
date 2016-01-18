@@ -25,8 +25,9 @@ app.controller "AppCtrl", [
         # Wait for all API-Calls to finish
         $q.all([
             ApiService.getBaseData()
+            ApiService.getBaseData("m")
         ]).then ( (data) ->
-            baseData = data[2]
+            baseData = data[0]
 
             # baseData looks as follows
             ###
