@@ -16,6 +16,7 @@ app.controller "AppCtrl", [
         ###
 
         $scope.markers = {}
+        $scope.markersBackup = {}
         # Map center is somewhere in the middle of austria
         $scope.center =
             lat: 47.480959
@@ -27,7 +28,7 @@ app.controller "AppCtrl", [
             ApiService.getBaseData()
             ApiService.getBaseData("m")
         ]).then ( (data) ->
-            baseData = data[0]
+            baseData = data[0].data.json
 
             # baseData looks as follows
             ###
@@ -45,54 +46,54 @@ app.controller "AppCtrl", [
                 ]
             ###
 
-            baseData = [
-                {
-                    name: "kohlenmonoxid"
-                    values: [
-                        {
-                            location: "Tauernautobahn"
-                            lat: 47.814979
-                            long: 13.034382
-                            value: 0.1
-                        }
-                        {
-                            location: "Tamsweg"
-                            lat: 47.326501
-                            long: 12.794627
-                            value: 0.4
-                        }
-                        {
-                            location: "Zell am See"
-                            lat: 47.682836
-                            long: 13.099793
-                            value: 0.9
-                        }
-                    ]
-                }
-                {
-                    name: "stickstoffmonoxid"
-                    values: [
-                        {
-                            location: "Tauernautobahn"
-                            lat: 47.814979
-                            long: 13.034382
-                            value: 0.1
-                        }
-                        {
-                            location: "Tamsweg"
-                            lat: 47.326501
-                            long: 12.794627
-                            value: 0.4
-                        }
-                        {
-                            location: "Zell am See"
-                            lat: 47.682836
-                            long: 13.099793
-                            value: 0.9
-                        }
-                    ]
-                }
-            ]
+            # baseData = [
+            #     {
+            #         name: "kohlenmonoxid"
+            #         values: [
+            #             {
+            #                 location: "Tauernautobahn"
+            #                 lat: 47.814979
+            #                 long: 13.034382
+            #                 value: 0.1
+            #             }
+            #             {
+            #                 location: "Tamsweg"
+            #                 lat: 47.326501
+            #                 long: 12.794627
+            #                 value: 0.4
+            #             }
+            #             {
+            #                 location: "Zell am See"
+            #                 lat: 47.682836
+            #                 long: 13.099793
+            #                 value: 0.9
+            #             }
+            #         ]
+            #     }
+            #     {
+            #         name: "stickstoffmonoxid"
+            #         values: [
+            #             {
+            #                 location: "Tauernautobahn"
+            #                 lat: 47.814979
+            #                 long: 13.034382
+            #                 value: 0.1
+            #             }
+            #             {
+            #                 location: "Tamsweg"
+            #                 lat: 47.326501
+            #                 long: 12.794627
+            #                 value: 0.4
+            #             }
+            #             {
+            #                 location: "Zell am See"
+            #                 lat: 47.682836
+            #                 long: 13.099793
+            #                 value: 0.9
+            #             }
+            #         ]
+            #     }
+            # ]
 
 
             init baseData
@@ -124,11 +125,8 @@ app.controller "AppCtrl", [
 
                 {scale, min, max} = colorScale parameter.values
 
-                drawBarChart parameter, scale
+                # vidatio.BarChart parameter, scale
                 drawMarker parameter, scale, min, max
-
-        drawBarChart = (data, scale) ->
-            new vidatio.BarChart data, scale
 
         drawMarker = (dataObj, scale, min, max) ->
             for data, i in dataObj.values
@@ -142,9 +140,9 @@ app.controller "AppCtrl", [
                 else
                     markerWidth = markerHeight = minMarkerSize
 
-                $scope.markers[dataObj.name + "_" + data.location] =
-                    lat: data.lat
-                    lng: data.long
+                $scope.markers[dataObj.name + "_" + data.location.replace /\W/g, ""] =
+                    lat: data.latitude
+                    lng: data.longitude
                     message: dataObj.name
                     icon:
                         type: "div"
@@ -153,6 +151,34 @@ app.controller "AppCtrl", [
 
         # triggers on every checkbox change
         $scope.toggleParameter = (parameter) ->
-            $(".#{parameter.name}").toggle()
+
+            # toggles the visibility of charts
+            $(".#{parameter.name.replace ".", ""}").toggle()
+
+            # toggles the visibility of markers
+            toggleMarker parameter
+
+            return false
+
+        toggleMarker = (parameter) ->
+
+            ###
+                check if key in markersBackup exists
+                    if yes remove object in markersBackup and add it in markers
+                    else remove from markers and add it in markersBackup
+            ###
+            if Object.keys($scope.markersBackup).some(((key) ->
+                ~key.indexOf(parameter.name)
+              ))
+                for key, value of $scope.markersBackup
+                    if ~key.indexOf(parameter.name)
+                        $scope.markers[key] = value
+                        delete $scope.markersBackup[key]
+            else
+                for key, value of $scope.markers
+                    if ~key.indexOf(parameter.name)
+                        $scope.markersBackup[key] = value
+                        delete $scope.markers[key]
+
             return false
 ]
