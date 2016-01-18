@@ -8,7 +8,7 @@
                 ul
                     li(ng-repeat="parameter in selection")
                         label
-                            input(type="checkbox" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
+                            input(type="checkbox" ng-init="parameter.checked=true" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
                             | {{ parameter.name | capitalize }}
 
         .row

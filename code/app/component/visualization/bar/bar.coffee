@@ -14,9 +14,9 @@ class vidatio.BarChart extends vidatio.Visualization
             locations.push data.location
 
         $ ->
-            $("#chart").append("<div class=#{dataObj.name}></div>")
+            $("#chart").append("<div class=#{dataObj.name.replace ".", ""}></div>")
             chart = c3.generate
-                bindto: ".#{dataObj.name}"
+                bindto: ".#{dataObj.name.replace ".", ""}"
                 data:
                     columns: barData,
                     type: "bar"
