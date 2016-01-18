@@ -1,6 +1,6 @@
 "use strict"
 
-class vidatio.BarChart extends vidatio.Visualization
+class window.vidatio.BarChart extends window.vidatio.Visualization
     constructor: (dataObj, scale) ->
 
         # C3JS needs a 2d-Array with a string at the beginning

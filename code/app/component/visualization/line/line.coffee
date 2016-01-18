@@ -1,7 +1,9 @@
 "use strict"
 
-class vidatio.TimeSeriesChart extends vidatio.Visualization
+class window.vidatio.TimeSeriesChart extends window.vidatio.Visualization
     constructor: (data) ->
+
+        @chart = null
 
         columns = []
         months = {}
@@ -26,10 +28,8 @@ class vidatio.TimeSeriesChart extends vidatio.Visualization
             tmp = tmp.concat(value)
             columns.push tmp
 
-        console.log columns
-
-        $ ->
-            chart = c3.generate
+        $ =>
+            @chart = c3.generate
                 bindto: '#line-chart'
                 data:
                     x: 'x'
@@ -38,4 +38,7 @@ class vidatio.TimeSeriesChart extends vidatio.Visualization
                     type: 'timeseries'
                     tick: format: '%Y-%m'
 
-            super(data, chart)
+            super(data, @chart)
+
+    getChart: ->
+        return @chart
