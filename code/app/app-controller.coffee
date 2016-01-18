@@ -125,7 +125,7 @@ app.controller "AppCtrl", [
 
                 {scale, min, max} = colorScale parameter.values
 
-                # vidatio.BarChart parameter, scale
+                vidatio.BarChart parameter, scale
                 drawMarker parameter, scale, min, max
 
         drawMarker = (dataObj, scale, min, max) ->
