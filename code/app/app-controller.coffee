@@ -112,7 +112,6 @@ app.controller "AppCtrl", [
 
             console.log lineChart.getChart()
 
-
             return false
 
         toggleMarker = (parameter) ->

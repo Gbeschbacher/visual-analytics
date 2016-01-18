@@ -10,8 +10,6 @@
             #bar-charts
     .row
         .col-xs-12
-            ul
-                li(ng-repeat="parameter in selection")
-                    label
-                        input(type="checkbox" ng-init="parameter.checked=true" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
-                        | {{ parameter.name | capitalize }}
+            div(ng-repeat="parameter in selection")
+                label
+                    input(type="checkbox" ng-init="parameter.checked=true" ng-model="parameter.checked" ng-change="toggleParameter(parameter)") {{ parameter.name | capitalize }}
