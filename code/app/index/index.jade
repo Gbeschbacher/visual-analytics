@@ -1,4 +1,10 @@
 .container-fluid
+    .checkboxes.ui-widget-content
+        h2 Schadstoffe
+        div(ng-repeat="parameter in selection")
+            label
+                input(type="checkbox" ng-init="parameter.checked=true" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
+                | {{ ' ' + parameter.name | capitalize }}
     .row
         .col-xs-12
             h1 Luftgüte Salzburg Land - 2014
@@ -13,9 +19,3 @@
             h2 Schadstoffe (Messstationen & Durchschnitte pro Jahr)
             #bar-charts
 
-    .checkboxes.ui-widget-content
-        h2 Schadstoffe
-        div(ng-repeat="parameter in selection")
-            label
-                input(type="checkbox" ng-init="parameter.checked=true" ng-model="parameter.checked" ng-change="toggleParameter(parameter)")
-                | {{ ' ' + parameter.name | capitalize }}
